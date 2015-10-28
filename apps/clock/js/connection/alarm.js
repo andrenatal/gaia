@@ -4,15 +4,15 @@ define(function(require, exports) {
 var Alarm = require('alarm');
 var parseTime = require('ext/parse_loose_time');
 
-exports.onmessage = function(event, port) {
-  if (event.type !== 'create') {
+exports.onmessage = function(event, port, time) {
+  if (event.type !== 'message') {
     port.postMessage({
       error: `Error: Invalid gaia_alarm message type "${event.type}"`
     });
     return;
   }
 
-  var time = event.data.time;
+  //var time = event.data.time;
   var timeObject = typeof time === 'object' ? time : parseTime(time);
 
   if (!isValidTime(timeObject)) {

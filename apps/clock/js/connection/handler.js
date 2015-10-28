@@ -7,6 +7,7 @@ var handlers = {
 };
 
 exports.init = function() {
+
   navigator.mozSetMessageHandler('connection', req => {
     var port = req.port;
     var handler = handlers[req.keyword];
@@ -32,6 +33,53 @@ exports.init = function() {
       };
     }
   });
+
+  // Handle the activities
+  navigator.mozSetMessageHandler('activity', function(activityRequest) {
+
+    var option = activityRequest.source;
+    var handler;
+    var evt;
+
+    if (option.name === "clock") {
+
+      // We handle the alarm
+      if (option.data.type === "alarm"){
+        handler = handlers["gaia_alarm"];
+
+        evt = new CustomEvent('message', {
+          data: { time : "9:30am"}
+        });
+
+        // Create the output message
+        handler.onmessage(evt, null, "6:30am");
+        setTimeout(function(){
+          // post back the results
+          activityRequest.postResult("Alarm set");
+        } , 2000);
+      }
+
+      if (option.data.type === "timer"){
+        handler = handlers["gaia_timer"];
+        evt = new CustomEvent('message', {
+          data: { time : "9:30am"}
+        });
+
+        // Create the output message
+        handler.onmessage(evt, null, "0:10");
+
+        setTimeout(function(){
+          alert('posting result');
+          activityRequest.postResult("Timer set");
+        } , 1000);
+      }
+
+    }
+
+
+  });
+
+
 };
 
 });

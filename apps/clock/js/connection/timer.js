@@ -48,7 +48,10 @@ exports.onmessage = function(event) {
 };
 
 function exec(event) {
-  var { type, duration } = event.data;
+  //var { type, duration } = ["create", "00:10"]; //event.data;
+  var type = "create";
+  var duration = "10 seconds";
+
   if (type === 'create') {
     create(duration);
     return;

@@ -7,6 +7,17 @@
     "name": "The Gaia Team",
     "url": "https://github.com/mozilla-b2g/gaia"
   },
+  "activities": {
+
+    "clock": {
+      "href": "./index.html",
+      "disposition": "inline",
+      "filters": {
+        "type": ["alarm", "timer"]
+      },
+      "returnValue": true
+    }
+  },
   "permissions": {
     "themeable":{},
     "alarms":{},
