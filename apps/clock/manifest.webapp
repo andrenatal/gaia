@@ -11,7 +11,7 @@
 
     "clock": {
       "href": "./index.html",
-      "disposition": "inline",
+      "disposition": "window",
       "filters": {
         "type": ["alarm", "timer"]
       },

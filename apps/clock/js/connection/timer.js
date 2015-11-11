@@ -36,22 +36,23 @@ function onTimerEvent(evt) {
   });
 }
 
-exports.onmessage = function(event) {
+exports.onmessage = function(event, port, time) {
   if (timer) {
-    exec(event);
+    exec(event, port, time);
   } else {
     Timer.singleton((err, t) => {
       timer = t;
-      exec(event);
+      exec(event, port, time);
     });
   }
 };
 
-function exec(event) {
+function exec(event, port, time) {
   //var { type, duration } = ["create", "00:10"]; //event.data;
   var type = "create";
-  var duration = "10 seconds";
-
+  //alert("antes" + JSON.stringify(event) );
+  var duration = time;
+  //alert(duration);
   if (type === 'create') {
     create(duration);
     return;

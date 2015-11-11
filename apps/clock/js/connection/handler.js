@@ -45,33 +45,38 @@ exports.init = function() {
 
       // We handle the alarm
       if (option.data.type === "alarm"){
+        document.querySelector("#alarm-tab").click();
         handler = handlers["gaia_alarm"];
 
         evt = new CustomEvent('message', {
-          data: { time : "9:30am"}
+          data: { time : option.data.value}
         });
 
         // Create the output message
-        handler.onmessage(evt, null, "6:30am");
+        handler.onmessage(evt, null,  option.data.value);
         setTimeout(function(){
           // post back the results
           activityRequest.postResult("Alarm set");
-        } , 2000);
+          //window.close();
+        } , 3000);
       }
 
       if (option.data.type === "timer"){
         handler = handlers["gaia_timer"];
-        evt = new CustomEvent('message', {
-          data: { time : "9:30am"}
+        evt = new CustomEvent('create', {
+          data: { time : "10:00"}
         });
 
         // Create the output message
-        handler.onmessage(evt, null, "0:10");
+        handler.onmessage(evt, null, "7 seconds");
 
         setTimeout(function(){
-          alert('posting result');
+          document.querySelector("#timer-tab").click();
+        } , 500);
+
+        setTimeout(function(){
           activityRequest.postResult("Timer set");
-        } , 1000);
+        } , 3000);
       }
 
     }

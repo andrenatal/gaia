@@ -29,7 +29,7 @@ function ActivityController(app) {
   this.settings = app.settings;
   this.configure();
   this.bindEvents();
-  debug('initialized');
+  debug('initialized activity on camera');
 }
 
 /**
@@ -119,6 +119,11 @@ ActivityController.prototype.onMessage = function(activity) {
   this.configureMode(activity);
   this.app.emit('activity', data);
   this.app.emit('activity:' + name, data);
+
+  setTimeout( function() {
+    document.getElementsByName("capture")[0].click();
+  } , 1000);
+
 };
 
 /**

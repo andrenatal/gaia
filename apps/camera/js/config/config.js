@@ -296,7 +296,7 @@ module.exports = {
         title: 'self-timer-10-seconds'
       }
     ],
-    persistent: false,
+    persistent: true,
   },
 
   hdr: {
