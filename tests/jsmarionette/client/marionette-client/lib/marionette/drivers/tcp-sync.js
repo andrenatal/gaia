@@ -186,6 +186,10 @@ TcpSync.prototype._readResponse = function() {
  *     The return value from the passed in callback.
  */
 TcpSync.prototype.send = function(obj, cb) {
+
+  console.log('no send no abstract');
+
+
   if (obj instanceof Command || obj instanceof Response) {
     return this.sendMessage(obj, cb);
   } else {

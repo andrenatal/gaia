@@ -1,6 +1,8 @@
 /* global __dirname */
 'use strict';
 
+var Marionette = require('marionette-client');
+
 (function() {
   var assert = require('assert');
   var ActivityCallerApp = require('./lib/activitycallerapp');
@@ -18,7 +20,8 @@
           'activitycalleewindow.gaiamobile.org':
             __dirname + '/../apps/activitycalleewindow'
         }
-      }
+      },
+      driver: Marionette.Drivers.Promises
     });
 
     // Bug 1035048: JSMarionette should be able to know displaying app.
