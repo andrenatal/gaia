@@ -63,12 +63,16 @@
    * @param {Object} data marionette command.
    */
   proto.send = function send(data) {
-    debug('writing ', data, 'to socket');
+    console.log('writing ', data, 'to socket:' + JSON.stringify(this.socket));
     if (this.socket.write) {
       //nodejs socket
+      console.log('writing ', data, 'to socket nodejs');
+
       this.socket.write(this.stringify(data), 'utf8');
     } else {
       //moztcp socket
+      console.log('writing ', data, 'to socket moztcp');
+
       this.socket.send(this.stringify(data));
     }
   };

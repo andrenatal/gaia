@@ -33,7 +33,7 @@ function Tcp(options) {
    * @property connectionId
    * @type Number
    */
-  this.connectionId = 0;
+  this.connectionId = Math.random();
 
   /**
    * The remote hostname.
@@ -60,7 +60,9 @@ Tcp.prototype = Object.create(Abstract.prototype);
  * @param {Object} cmd remote marionette command.
  */
 Tcp.prototype._sendCommand = function _sendCommand(cmd) {
+  console.log('send a command to the server:' + typeof this.client + " - " + cmd);
   this.client.send(cmd);
+  console.log('send a command to the server - after');
 };
 
 /**
@@ -74,7 +76,7 @@ Tcp.prototype._connect = function connect() {
   };
 
   retrySocket.waitForSocket(options, function(err, socket) {
-    debug('got socket starting command stream');
+    debug('got socket starting command stream:' + socket);
     this.socket = socket;
     this.client = new CommandStream(this.socket);
     this.client.on('command', this._onClientCommand.bind(this));

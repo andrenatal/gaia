@@ -43,9 +43,10 @@ HostManager.prototype = {
   createHost: function(options) {
     options = options || {};
     var profile = options.profile || {};
-    var driver = options.driver || Marionette.Drivers.TcpSync;
+    var driver = options.driver || Marionette.Drivers.Promises;
     var desiredCapabilities = options.desiredCapabilities ||
       this.desiredCapabilities;
+
 
     debug('create host', profile);
 
